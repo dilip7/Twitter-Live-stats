@@ -1,9 +1,9 @@
 routes = (app) ->
 
-  app.get '/' , (req,res) ->
+  app.get '/:tag' , (req,res) ->
     res.send "Shit works!"
     livestatshelper = require './helpers/getlivestats'
-    livestatshelper.getdata req.body,req.ip,(response) ->
+    livestatshelper.getdata req.body,req.ip,req.params.tag,(response) ->
       #res.header "Access-Control-Allow-Origin", "*"
       #res.send response
 
