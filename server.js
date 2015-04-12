@@ -52,29 +52,45 @@ webappRouter = express.Router();
 webappRoutes = require('./routers')(webappRouter);
 app.use('/',webappRoutes);
 
+
 var server = null;
 server = require('http').createServer(app);
-port = require('./port');
-server.listen(port,function(){
-  console.log("Express boilerplate running on port %d in %s mode", port, app.settings.env);
-  console.log('Server\'s UID is now ' + process.getuid());
+require('./core/bootstrap').isEnvironmentSane(server,function(err,port){ 
+  if(err){
+    console.log(err);
+    process.exit(1)
+  }
+  else
+  {
+    server.listen(port,function(){
+    console.log("Server  listening on port %d in %s mode", port , app.settings.env);
+    console.log('Server\'s UID is now ' + process.getuid());
+    });
+  }
 });
+module.exports = app;
+
+
 
 // Create a new ntwitter instance
-var twit = new twitter(config.twitter);
+//var twit = new twitter(config.twitter);
 
 // Index Route
-app.get('/', routes.index);
+//app.get('/', routes.index);
 
 // Page Route
-app.get('/page/:page/:skip', routes.page);
+//app.get('/page/:page/:skip', routes.page);
 
 // Initialize socket.io
-var io = require('socket.io').listen(server);
+//app.io = require('socket.io').listen(server);
 
+//console.log(app.io);
 // Set a stream listener for tweets matching tracking keywords
-twit.stream('statuses/filter',{ track: 'android'}, function(stream){
-  streamHandler(stream,io);
+// pass comma separated for many 
+/**
+twit.stream('statuses/filter',{ track: 'livquik'}, function(stream){
+  streamHandler(stream,app.io);
 });
+**/
 
 
