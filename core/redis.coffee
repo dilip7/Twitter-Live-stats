@@ -1,4 +1,4 @@
 class Redis
   @getClient: ->
-    redis = require('redis').createClient(6379,'redis',{})
+    redis = require('redis').createClient()
 module.exports = Redis
