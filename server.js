@@ -6,7 +6,6 @@ cookieParser = require('cookie-parser');
 session = require('express-session');
 RedisStore = require('connect-redis')(session),
 methodOverride = require('method-override');
-
 errorHandler = require('errorhandler');
 helmet = require('helmet');
 csrf = require ('csurf');
@@ -17,6 +16,9 @@ app = module.exports = express();
 app.set('trust proxy',1);
 app.disable('x-powered-by');
 
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set('view engine', 'jade');
 
@@ -30,7 +32,7 @@ app.use(session({
 app.use(express.static(__dirname + '/assets'));
 
 webappRouter = express.Router();
-webappRouter.use(csrf());
+//webappRouter.use(csrf());
 webappRoutes = require('./routers')(webappRouter);
 app.use('/',webappRoutes);
 
