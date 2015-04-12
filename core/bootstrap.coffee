@@ -12,7 +12,7 @@ class SanityCheck
       socket = require './socket'
       io = require('socket.io').listen(app,{log:false})
       socket.setsocket io
-      #require('../helpers/core/sockets/outlet').initialize(io)
+      #require('../helpers/sockets').initialize(io)
       _callback null
 
     async.waterfall [sockets],(err,res) ->

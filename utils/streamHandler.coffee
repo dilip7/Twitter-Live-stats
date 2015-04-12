@@ -9,7 +9,10 @@ class StreamHandler
     # When tweets get sent our way ...
     stream.on 'data', (data) ->
       preprocess = (_callback ) ->
-        _callback null
+        if data?
+          _callback null
+        else
+          _callback "error in tweet"
 
       storetweets = (_callback) ->
         # Construct a new tweet object

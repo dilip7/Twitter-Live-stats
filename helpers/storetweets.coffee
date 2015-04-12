@@ -4,6 +4,7 @@ async = require('async')
 _mongo = require('../core/mongo')
 request = require ("request")
 nodeurl = require('url')
+_socket = require('../core/socket')
 
 exapndurlendpoint  = "http://api.longurl.org/v2/expand?url="
 
@@ -49,7 +50,8 @@ class StoreTweets
           ),(err)->
             _callback err,details
       else
-        _callback null,details
+        # no need to process this tweet
+        _callback "notvalid"
 
     storetweet2 = (details,_callback) ->
       _mongo.getClient (err,db) ->
@@ -57,10 +59,30 @@ class StoreTweets
         collection.insert details,{w:1},(err,res)->
           console.log "STORING " + incomingtweet.id
           db.close()
-          _callback err
+          _callback err,details
 
-    async.waterfall [storetweet1,expandurls,storetweet2],(err,place)->
+    fetchlivestats = (details,_callback) ->
+      console.log 'fetchlivestats'
+      _mongo.getClient (err,db) ->
+        collection = db.collection 'dilip'
+        collection.aggregate {$match: {tag: tagsstring}},{$group: {_id: "$domain",total: {$sum: 1}}},{$sort: {total: -1}} , (err,res) ->
+          console.log err
+          console.log res
+          db.close()
+          _callback err,details
+
+    emitsocket = (details,_callback) ->
+      console.log "emitsocket"
+      io = _socket.get()
+      io.emit "#{tagsstring}",details
+      _callback null
+
+
+    async.waterfall [storetweet1,expandurls,storetweet2,fetchlivestats,emitsocket],(err,place)->
       console.log "PROCESSED " + incomingtweet.id
+      if err?
+        if err is "notvalid"
+          callback null if callback?
       callback err if callback?
 
 module.exports = new StoreTweets()
