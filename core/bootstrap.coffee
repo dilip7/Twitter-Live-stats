@@ -30,11 +30,10 @@ class SanityCheck
     #3.Reset collection
     resetcollection = (_callback) ->
       _mongo.getClient (err,db) ->
+        _callback err
         collection = db.collection config.mongocollection
-        collection.drop  (err) ->
-          console.log config.mongocollection + " has been reset"
+        collection.drop () ->
           db.close()
-          _callback err
 
     async.waterfall [sockets,checkmongo,resetcollection],(err,res) ->
       if err?

@@ -1,6 +1,6 @@
 require('coffee-script/register');
 express = require('express');
-exphbs = require('express-handlebars'),
+//exphbs = require('express-handlebars'),
 
 
 bodyParser = require("body-parser");
@@ -13,7 +13,7 @@ helmet = require('helmet');
 csrf = require ('csurf');
 twitter = require('twitter');
 mongoose = require('mongoose');
-routes = require('./routes');
+//routes = require('./routes');
 config = require('./config');
 streamHandler = require('./utils/streamHandler');
 
@@ -28,13 +28,14 @@ app.disable('x-powered-by');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-//app.set('view engine', 'jade');
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
 
-mongoose.connect('mongodb://localhost:27017/tweets');
+//mongoose.connect('mongodb://localhost:27017/tweets');
 
 // Set handlebars as the templating engine
-app.engine('handlebars', exphbs({ defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
+//app.engine('handlebars', exphbs({ defaultLayout: 'main'}));
+//app.set('view engine', 'handlebars');
 
 app.use(session({
   secret: "asdodweodnqjndoskxmlaskxmklsmx",
