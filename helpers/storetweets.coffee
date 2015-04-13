@@ -5,6 +5,7 @@ _mongo = require('../core/mongo')
 request = require ("request")
 nodeurl = require('url')
 _socket = require('../core/socket')
+config = require('../config')
 
 exapndurlendpoint  = "http://api.longurl.org/v2/expand?url="
 
@@ -55,7 +56,7 @@ class StoreTweets
 
     storetweet2 = (details,_callback) ->
       _mongo.getClient (err,db) ->
-        collection = db.collection 'dilip'
+        collection = db.collection config.mongocollection
         collection.insert details,{w:1},(err,res)->
           console.log "STORING " + incomingtweet.id
           db.close()
@@ -64,7 +65,7 @@ class StoreTweets
     fetchlivestats = (details,_callback) ->
       console.log 'fetchlivestats'
       _mongo.getClient (err,db) ->
-        collection = db.collection 'dilip'
+        collection = db.collection config.mongocollection
         collection.aggregate {$match: {tag: tagsstring}},{$group: {_id: "$domain",total: {$sum: 1}}},{$sort: {total: -1}} , (err,res) ->
           console.log err
           console.log res
