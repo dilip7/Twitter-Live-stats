@@ -3,6 +3,7 @@ config = require('../config')
 twit = new twitter(config.twitter)
 streamHandler = require('../utils/streamHandler')
 sockethelper = require('../core/socket')
+storetweetshelper = require('../helpers/storetweets')
 
 class GetLiveStats
   getdata: (incoming,ip,trackingstring,callback) ->
@@ -11,7 +12,10 @@ class GetLiveStats
       _callback null
       twit.stream 'statuses/filter', { track: trackingstring}, (stream) ->
         stream.on "data",(tweet) ->
-          streamHandler.handlestream stream, sockethelper.get(),trackingstring
+          console.log tweet.id
+          #streamHandler.handlestream stream, sockethelper.get(),trackingstring
+          storetweetshelper.storetweet tweet,trackingstring, (err)->
+            console.log err if err?
         stream.on "error",(err)->
           console.log "some error happened in stream parsing --> " + err
 

@@ -18,11 +18,11 @@ class StoreTweets
       tweet =
         twid: incomingtweet['id']
         active: false
-        author: incomingtweet['user']['name']
-        avatar: incomingtweet['user']['profile_image_url']
+        author: incomingtweet['user']
+        avatar: incomingtweet['user']
         body: incomingtweet['text']
         date: incomingtweet['created_at']
-        screenname: incomingtweet['user']['screen_name']
+        screenname: incomingtweet['user']
         urls : incomingtweet['entities']['urls']
         tag : tagsstring
       console.log "STARTING " + incomingtweet.id
