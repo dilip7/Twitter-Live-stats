@@ -1,0 +1,51 @@
+//!!! 5
+doctype html
+html(lang='en-us')
+  head
+    meta(charset='utf-8')
+    title  QuikWallet
+    meta(name='description', content='')
+    meta(name='author', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    link(rel='stylesheet', type='text/css', media='screen', href='/qw/css/qw_production_minified.css?v=6')
+    link(href='/qw/favicon.ico',rel='shortcut icon',type='image/x-icon')
+    link(href='/qw/favicon.ico',rel='icon',type='image/x-icon')
+  body.fixed-header
+    input(type="hidden", name="_csrf", value="#{token}")
+    header#header
+    aside#left-panel(style='display:none;background:none repeat scroll 0 0 #373B48;')
+    #main(role='main')
+      #content
+        .col-xs-10.col-sm-6.col-md-4.col-lg-4.col-xs-offset-1.col-md-offset-4.col-sm-offset-3.col-lg-offset-4
+          p.spinner#spinner(style='margin-top: 30%;margin-bottom: 30%;padding: 5%;')
+      .row(style='bottom:0px;')
+       .col-xs-12.col-sm-12.col-md-12.col-lg-12(style='color: #fff;font-size:12px;text-align:center;margin-top:50px;')
+        | DOWNLOAD OUR APP
+       .col-xs-12.col-sm-12.col-md-12.col-lg-12
+         div(align='center', style='margin-top:10px;display:none;')
+          a(id='android',href='https://play.google.com/store/apps/details?id=com.livquik.quikwallet', style='border: medium none transparent;', target='_blank', title='Download QuikWallet for Android')
+           img(src='qw/img/play_store.png', alt='Download QuikWallet')
+       .col-xs-12.col-sm-12.col-md-12.col-lg-12
+         div( align='center', style='margin-top:10px;display:none')
+          a(id='ios' , href='https://itunes.apple.com/in/app/quikwallet/id903976200?mt=8', style='border: medium none transparent;', target='_blank', title='Download QuikWallet for iOS')
+           img(src='qw/img/app_store_logo.png', alt='Download QuikWallet')
+       .col-xs-12.col-sm-12.col-md-12.col-lg-12(style='color: #fff;font-size:14px;text-align:center;margin-top:20px;')
+         | QuikWallet is 100% safe and secure
+         br
+         | Certified by 
+         br
+         img(src='qw/img/pcidss_logo.png', alt='PCI-DSS', style='height:40px; margin-top:10px;')
+       .col-xs-12.col-sm-12.col-md-12.col-lg-12(style='color: #fff;font-size:10px;text-align:center;margin-top: 15px; margin-bottom: 5px;')
+        | All trademarks are properties of their respective owners.
+        br
+        | Copyright © 2015 LivQuik Technology (India) Private Limited. All rights reserved.
+  script(type='text/javascript').
+    var token = "#{token}"
+    var pub_key = "#{recaptcha_key}";
+    var require = {
+       urlArgs : "v=110",
+       waitSeconds : 0
+     };
+  #modals
+  script(data-main='/qw/js/build/main', src='/qw/js/bower_components/requirejs/require.js')
+  //-script(data-main='/qw/js/run', src='/qw/js/bower_components/requirejs/require.js')
