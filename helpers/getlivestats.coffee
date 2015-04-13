@@ -10,7 +10,10 @@ class GetLiveStats
     initsocket = (_callback) ->
       _callback null
       twit.stream 'statuses/filter', { track: trackingstring}, (stream) ->
-        streamHandler.handlestream stream, sockethelper.get(),trackingstring
+        stream.on "data",(tweet) ->
+          streamHandler.handlestream stream, sockethelper.get(),trackingstring
+        stream.on "error",(err)->
+          console.log "some error happened in stream parsing --> " + err
 
     async.waterfall [initsocket],(err,place)->
       callback err
