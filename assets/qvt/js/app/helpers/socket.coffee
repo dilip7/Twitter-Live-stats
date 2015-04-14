@@ -1,13 +1,13 @@
 define ['socketio'],(io) ->
   class SocketHelper
+    sockethandler = null
 
     init: ->
       socket = io.connect("/")
       socket.on "connect",() ->
+        sockethandler = socket
         console.log "connect happened"
-        #socket.emit "joinroom",{"tagstring":'quikwallet'}
 
-      #socket.emit "joinroom",{"tag":'hello'}
       socket.on "livestats", (data) ->
         console.log 'emitted data'
         console.log data
@@ -15,5 +15,11 @@ define ['socketio'],(io) ->
         require ['cs!app/helpers/billing'],(billinghelper) ->
           billinghelper.newCheckin user
         ###
+
+    emit:(tagstring) ->
+      console.log "emit"
+      if sockethandler?
+        sockethandler.emit "joinroom" ,{"tagstring":tagstring}
+
   new SocketHelper()
 

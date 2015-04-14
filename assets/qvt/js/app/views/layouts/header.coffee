@@ -11,6 +11,7 @@ define ['marionette','jade!app/views/layouts/header'],(Marionette,template) ->
       inputstring = @$("#taginput").val()
       if inputstring is ''
         alert "Enter a keyword"
+        return
       else if inputstring.split(' ').length isnt 1
         inputstring = inputstring.split(' ')[0]
       console.log "to search"

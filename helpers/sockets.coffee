@@ -7,6 +7,10 @@ class SocketHelper
       socket.on 'joinroom',(data)->
         console.log "joinroom called"
         console.log data
+        # check if already member of a room , then remove him
+        if socket.room?
+          socket.leave socket.room
+        # assign to new room
         socket.room = "room:#{data.tagstring}"
         socket.join socket.room
 

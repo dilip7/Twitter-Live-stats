@@ -15,9 +15,7 @@ define ['require'],(require) ->
         callback = (data) =>
           console.log 'respose came'
           console.log data
+          sockethelper.emit tagstring
         ajaxutil.ajax 'getlivestats',tosend,'POST',callback
-
-
-
 
   new AppHelper()
