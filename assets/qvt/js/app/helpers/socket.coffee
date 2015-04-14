@@ -5,7 +5,7 @@ define ['socketio'],(io) ->
       socket = io.connect("/")
       socket.on "connect",() ->
         console.log "connect happened"
-        socket.emit "joinroom",{"tagstring":'quikwallet'}
+        #socket.emit "joinroom",{"tagstring":'quikwallet'}
 
       #socket.emit "joinroom",{"tag":'hello'}
       socket.on "livestats", (data) ->

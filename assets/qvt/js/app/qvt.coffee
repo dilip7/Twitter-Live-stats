@@ -2,7 +2,6 @@ define ['backbone','marionette','cs!app/helpers/socket','cs!app/helpers/app'],(B
   QVT = new Marionette.Application()
   QVT.addRegions
     header: '#header'
-    nav: '#sidebar-left'
     container: '#content'
     modals: '#modals'
   QVT.addInitializer () ->
