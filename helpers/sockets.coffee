@@ -19,6 +19,7 @@ class SocketHelper
 
   sendstats: (data,tagstring) ->
     io = _socket.get()
-    io.sockets.in("room:#{tagstring}").emit "livestats",data
+    #io.sockets.in("room:#{tagstring}").emit "livestats",data
+    io.sockets.emit "livestats",data
 
 module.exports = new SocketHelper()

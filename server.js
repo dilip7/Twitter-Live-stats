@@ -46,8 +46,6 @@ app.use(session({
 
 app.use(express.static(__dirname + '/assets'));
 
-
-
 webappRouter = express.Router();
 //webappRouter.use(csrf());
 webappRoutes = require('./routers')(webappRouter);
@@ -66,6 +64,7 @@ require('./core/bootstrap').isEnvironmentSane(server,function(err,port){
     server.listen(port,function(){
     console.log("Server  listening on port %d in %s mode", port , app.settings.env);
     console.log('Server\'s UID is now ' + process.getuid());
+    require('./helpers/getlivestats').getdata();
     });
   }
 });
