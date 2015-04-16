@@ -1,18 +1,21 @@
 define ['require'],(require) ->
-
   class AppHelper
-
     init: ->
       console.log 'init'
-      ###
-      require ['cs!app/qvt','cs!app/views/items/nav','cs!app/views/layouts/header','cs!app/collections/notifications','cs!app/views/collections/notifications'] , (QVT,NavView,HeaderLayout,Notifications,Notificationsview) ->
-        QVT.nav.show(new NavView()) unless QVT.nav.currentView?
+      require ['cs!app/qvt','cs!app/views/layouts/header'] , (QVT,HeaderLayout) ->
         headerlayout = new HeaderLayout()
         headerlayout.render()
-        QVT.header.show headerlayout
-        notifications = new Notifications([])
-        mediator.commands.execute 'setnotifications', notifications
-        headerlayout.notifications.show(new Notificationsview({collection:notifications}))
-      ###
+        QVT.container.show headerlayout
+
+    sendtag:(tagstring) ->
+      console.log 'sendtag'
+      require ['cs!app/utils/ajax','cs!app/helpers/socket'] , (ajaxutil,sockethelper) ->
+        tosend =
+          trackingstring: tagstring
+        callback = (data) =>
+          console.log 'respose came'
+          console.log data
+          sockethelper.emit tagstring
+        ajaxutil.ajax 'getlivestats',tosend,'POST',callback
 
   new AppHelper()

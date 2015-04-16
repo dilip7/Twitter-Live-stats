@@ -15,6 +15,9 @@ class StreamHandler
           _callback "error in tweet"
 
       storetweets = (_callback) ->
+        storetweetshelper.storetweet data,trackingstring, (err)->
+          console.log err if err?
+        ###
         # Construct a new tweet object
         tweet =
           twid: data['id']
@@ -32,6 +35,7 @@ class StreamHandler
           if !err
             # If everything is cool, socket.io emits the tweet.
             io.emit 'tweet', tweet
+        ###
       async.waterfall [preprocess,storetweets],(err,place)->
         callback err
 

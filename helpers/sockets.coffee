@@ -5,21 +5,21 @@ class SocketHelper
   initialize: (io) ->
     io.on 'connection',(socket) ->
       socket.on 'joinroom',(data)->
-        # error handling TODO
-        joinchannel = (_callback)->
-          socket.join "tag:#{data.tagstring}"
+        console.log "joinroom called"
+        console.log data
+        # check if already member of a room , then remove him
+        if socket.room?
+          socket.leave socket.room
+        # assign to new room
+        socket.room = "room:#{data.tagstring}"
+        socket.join socket.room
 
-  checkin: (user,outlet,address) ->
-    data =
-      username: user.mobile.substr(-4)
-      firstname: user.firstname
-      middlename: ''
-      lastname: user.lastname
-      name: user.firstname + ' ' + user.lastname
-      userid: user.id
-      at: new Date().getTime()
-    data.address = address if address?
+      socket.on 'disconnect',() ->
+        socket.leave socket.room
+
+  sendstats: (data,tagstring) ->
     io = _socket.get()
-    io.sockets.in("outlet:#{outlet.id}").emit "newcheckin",data
+    #io.sockets.in("room:#{tagstring}").emit "livestats",data
+    io.sockets.emit "livestats",data
 
 module.exports = new SocketHelper()

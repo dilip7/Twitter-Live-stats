@@ -7,11 +7,12 @@ head
     meta(name='description', content='QukWallet Virtual Terminal - QVT.')
     meta(name='author', content='Livquik')
     meta(name="viewport" content="width=device-width,user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')
 body
   header
     #header
   .container-fluid
-    input#taginput(type='text',placeholder = "enter a word ie. android")
+    //input#taginput(type='text',placeholder = "enter a word ie. android")
     .row-fluid
       #sidebar-left.span1
       noscript
@@ -25,12 +26,13 @@ body
   #modals.container-fluid
   footer
       span
-        | Â©
+        | ©
         Demo app for live stream stats 
         | 2014
-  script(type='text/javascript').
-    var require = {
-       urlArgs : "v=19"
-     };
+  //
+    script(type='text/javascript').
+      var require = {
+         urlArgs : "v=19"
+       };
   script(data-main='/qvt/js/run',src='/qvt/js/components/requirejs/require.js')
   //script(data-main='/qvt/js/build/main',src='/qvt/js/bower_components/requirejs/require.js')
