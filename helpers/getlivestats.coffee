@@ -18,5 +18,8 @@ class GetLiveStats
         console.log "Twitter returned error for Exceeded connection limit for user"
         console.log "Kindly restart server :("
         process.exit(1)
+      stream.on "end",(err) ->
+        console.log "end called"
+        console.log err
 
 module.exports = new GetLiveStats()

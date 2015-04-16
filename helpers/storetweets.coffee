@@ -12,23 +12,11 @@ exapndurlendpoint  = "http://api.longurl.org/v2/expand?url="
 
 class StoreTweets
   storetweet : (incomingtweet,tagsstring,callback) ->
-    # When tweets get sent our way ...
-    storetweet1 = (_callback) ->
-      # Construct a new tweet object
-      tweet =
-        twid: incomingtweet['id']
-        active: false
-        author: incomingtweet['user']
-        avatar: incomingtweet['user']
-        body: incomingtweet['text']
-        date: incomingtweet['created_at']
-        screenname: incomingtweet['user']
-        urls : incomingtweet['entities']['urls']
-        tag : tagsstring
-      console.log "STARTING " + incomingtweet.id
-      _callback null,tweet
 
-    expandurls = (details,_callback) ->
+    # this function expands url , if it fails then it stores twitter specified twitter specified expanded_url
+    expandurls = (_callback) ->
+      # store tag for mongo queries
+      incomingtweet.tag = tagsstring
       # some urls were found
       embeddedurls = incomingtweet.entities?.urls
       if embeddedurls and embeddedurls.length isnt 0
@@ -40,28 +28,28 @@ class StoreTweets
               # also keeping hostname like play.google.com for now , wasted lot of timeto make it perfect like google.com but no success :(
               expansion =  JSON.parse(body)
               resultedurl =  expansion['long-url']
-              details.domain = nodeurl.parse(resultedurl).hostname
+              incomingtweet.domain = nodeurl.parse(resultedurl).hostname
             else
-              details.domain = nodeurl.parse(eachurlobject.expanded_url).hostname
+              incomingtweet.domain = nodeurl.parse(eachurlobject.expanded_url).hostname
             __callback error
           ),(err)->
-            _callback err,details
+            _callback err
       else
         # no need to process this tweet
         _callback "notvalid"
 
-    storetweet2 = (details,_callback) ->
+    storetweet = (_callback) ->
       _mongo.getClient (err,db) ->
         collection = db.collection config.mongocollection
-        collection.insert details,{w:1},(err,res)->
-          console.log "STORING " + incomingtweet.id
+        collection.insert incomingtweet,{w:1},(err,res)->
+          #console.log "STORING " + incomingtweet.id
           db.close()
-          _callback err,details
+          _callback err
 
-    fetchlivestats = (details,_callback) ->
+    getdomaincount = (_callback) ->
       _mongo.getClient (err,db) ->
         collection = db.collection config.mongocollection
-        collection.aggregate {$match: {tag: tagsstring}},{$group: {_id: "$domain",total: {$sum: 1}}},{$sort: {total: -1}} , (err,res) ->
+        collection.aggregate {$match: {tag: tagsstring}},{$group: {_id: "$domain",total: {$sum: 1}}},{$sort: {total: -1}},{$project:{domain:"$_id",total:"$total",_id:0}} , (err,res) ->
           db.close()
           _callback err,res
 
@@ -69,10 +57,10 @@ class StoreTweets
       sockethelper.sendstats stats,tagsstring
       _callback null
 
-    async.waterfall [storetweet1,expandurls,storetweet2,fetchlivestats,emitsocket],(err,place)->
-      console.log "PROCESSED " + incomingtweet.id
+    async.waterfall [expandurls,storetweet,getdomaincount,emitsocket],(err,place)->
+      #console.log "PROCESSED " + incomingtweet.id
       if err?
-        console.log err
+        #console.log err
         if err is "notvalid"
           callback null if callback?
         else
