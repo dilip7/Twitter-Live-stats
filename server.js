@@ -69,28 +69,3 @@ require('./core/bootstrap').isEnvironmentSane(server,function(err,port){
   }
 });
 module.exports = app;
-
-
-
-// Create a new ntwitter instance
-//var twit = new twitter(config.twitter);
-
-// Index Route
-//app.get('/', routes.index);
-
-// Page Route
-//app.get('/page/:page/:skip', routes.page);
-
-// Initialize socket.io
-//app.io = require('socket.io').listen(server);
-
-//console.log(app.io);
-// Set a stream listener for tweets matching tracking keywords
-// pass comma separated for many 
-/**
-twit.stream('statuses/filter',{ track: 'livquik'}, function(stream){
-  streamHandler(stream,app.io);
-});
-**/
-
-
