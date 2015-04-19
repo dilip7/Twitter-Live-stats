@@ -4,7 +4,8 @@ module.exports =
     consumer_secret: 'WWxaQJVS5OkbgvHNHMWUzg8foSQz9pHovfn5hDiD3UDk7Ysb6u'
     access_token_key: '3150766542-yHhBZ9HChSJrfcIUTUbPxTEue9n0EtVNA9sTceG'
     access_token_secret: '1NJ5xvQSYD739DdRdp8brEK4rsR68JEKnu0VdlitpCxyJ'
-  mongourl:"mongodb://localhost:27017/newdb"
+  #mongourl:"mongodb://localhost:27017/newdb"
+  mongourl:"mongodb://dilip:dilip123@ds061741.mongolab.com:61741/newdb"
   mongocollection : 'dilip'
 
 
