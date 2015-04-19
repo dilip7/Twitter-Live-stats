@@ -8,7 +8,6 @@ define ['socketio'],(io) ->
         console.log "connect happened"
 
       socket.on "livestats", (data) ->
-        console.log 'emitted data'
         require ['cs!app/helpers/app'],(apphelper) ->
           apphelper.renderstats data
 

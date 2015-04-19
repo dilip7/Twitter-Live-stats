@@ -2,8 +2,7 @@ define ['marionette','jade!app/views/layouts/eachstat'],(Marionette,template) ->
   class EachStatView extends Marionette.Layout
     tagName : 'li'
     template: template
-    initialize : ->
-      console.log "eachstat initi"
-      console.log @
-    onRender:->
-      console.log 'eachstat onrender'
+    events:
+      'click #fetchtweets' : 'fetchtweets'
+    fetchtweets : ->
+      console.log @options.model.attributes.domain

@@ -8,19 +8,7 @@ define ['require'],(require) ->
         contentlayout.render()
         QVT.container.show contentlayout
 
-    #not needee anymore
-    sendtag:(tagstring) ->
-      require ['cs!app/utils/ajax','cs!app/helpers/socket'] , (ajaxutil,sockethelper) ->
-        tosend =
-          trackingstring: tagstring
-        callback = (data) =>
-          console.log 'respose came'
-          console.log data
-          sockethelper.emit tagstring
-        ajaxutil.ajax 'getlivestats',tosend,'POST',callback
-
     renderstats :(stats) ->
-      console.log 'sendstats'
       require ['cs!app/qvt','cs!app/views/layouts/content','cs!app/views/collections/stats','cs!app/collections/stats'] , (QVT,ContentLayout,StatsView,StatsCollection) ->
         statscollection = new StatsCollection(stats)
         #QVT.container.statslist.show(new statsView({collection:stats}))
