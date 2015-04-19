@@ -61,7 +61,7 @@ require('./core/bootstrap').isEnvironmentSane(server,function(err,port){
   }
   else
   {
-    server.listen(port,function(){
+    server.listen( process.env.PORT || port,function(){
     console.log("Server  listening on port %d in %s mode", port , app.settings.env);
     console.log('Server\'s UID is now ' + process.getuid());
     require('./helpers/getlivestats').getdata();
