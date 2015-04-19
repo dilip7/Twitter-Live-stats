@@ -24,17 +24,13 @@ app.set('trust proxy',1);
 app.disable('x-powered-by');
 
 
+// express components 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
-//mongoose.connect('mongodb://localhost:27017/tweets');
-
-// Set handlebars as the templating engine
-//app.engine('handlebars', exphbs({ defaultLayout: 'main'}));
-//app.set('view engine', 'handlebars');
 
 app.use(session({
   secret: "asdodweodnqjndoskxmlaskxmklsmx",
