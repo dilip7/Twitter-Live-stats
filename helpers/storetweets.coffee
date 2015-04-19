@@ -1,4 +1,3 @@
-Tweet = require('../models/Tweet')
 _ = require('underscore')
 async = require('async')
 _mongo = require('../core/mongo')

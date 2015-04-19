@@ -1,7 +1,7 @@
-define ['marionette','jade!app/views/layouts/content','cs!app/views/collections/tweets'],(Marionette,template,TweetsView) ->
+define ['marionette','jade!app/views/layouts/content','cs!app/views/collections/stats'],(Marionette,template,statsView) ->
   class ContentLayout extends Marionette.Layout
     template: template
     regions:
-      tweetslist : '#tweetslist'
+      statslist : '#statslist'
 
 

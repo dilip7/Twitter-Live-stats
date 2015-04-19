@@ -21,14 +21,14 @@ define ['require'],(require) ->
 
     renderstats :(stats) ->
       console.log 'sendstats'
-      require ['cs!app/qvt','cs!app/views/layouts/content','cs!app/views/collections/tweets','cs!app/collections/tweets'] , (QVT,ContentLayout,TweetsView,TweetsCollection) ->
-        tweetscollection = new TweetsCollection(stats)
-        #QVT.container.tweetslist.show(new TweetsView({collection:stats}))
-        #QVT.container.currentView.regions.tweetslist.show(new TweetsView({collection:tweetscollection}))
-        #QVT.container.show(new ContentLayout({collection:tweetscollection}))
+      require ['cs!app/qvt','cs!app/views/layouts/content','cs!app/views/collections/stats','cs!app/collections/stats'] , (QVT,ContentLayout,StatsView,StatsCollection) ->
+        statscollection = new StatsCollection(stats)
+        #QVT.container.statslist.show(new statsView({collection:stats}))
+        #QVT.container.currentView.regions.statslist.show(new statsView({collection:statscollection}))
+        #QVT.container.show(new ContentLayout({collection:statscollection}))
         contentlayout = new ContentLayout()
         contentlayout.render()
         QVT.container.show contentlayout
-        contentlayout.tweetslist.show(new TweetsView({collection:tweetscollection}))
+        contentlayout.statslist.show(new StatsView({collection:statscollection}))
 
   new AppHelper()

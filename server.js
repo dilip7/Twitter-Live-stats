@@ -15,7 +15,6 @@ twitter = require('twitter');
 mongoose = require('mongoose');
 //routes = require('./routes');
 config = require('./config');
-streamHandler = require('./utils/streamHandler');
 
 
 var app;
