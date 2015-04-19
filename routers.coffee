@@ -13,6 +13,12 @@ routes = (app) ->
       res.send response
   ###
 
+  app.post '/gettweets' , (req,res) ->
+    console.log req.body
+    gettweetshelper = require './helpers/gettweets'
+    gettweetshelper.gettweets req.body,(response) ->
+      res.header "Access-Control-Allow-Origin", "*"
+      res.send response
 
 
 module.exports = routes

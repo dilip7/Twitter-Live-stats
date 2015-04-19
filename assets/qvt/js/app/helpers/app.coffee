@@ -19,4 +19,12 @@ define ['require'],(require) ->
         QVT.container.show contentlayout
         contentlayout.statslist.show(new StatsView({collection:statscollection}))
 
+    gettweets : (filter) ->
+      require ['cs!app/utils/ajax','cs!app/views/layouts/content','cs!app/views/collections/stats','cs!app/collections/stats'] , (ajaxutil,ContentLayout,StatsView,StatsCollection) ->
+        tosend =
+          domain : filter
+        callback = (data) ->
+          console.log data
+        ajaxutil.ajax 'gettweets',tosend,'POST',callback
+
   new AppHelper()
