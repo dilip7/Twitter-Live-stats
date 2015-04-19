@@ -19,7 +19,6 @@ class GetLiveStats
         console.log "Kindly restart server :("
         process.exit(1)
       stream.on "end",(err) ->
-        console.log "end called"
-        console.log err
+        console.log "Stream end called, rate limit"
 
 module.exports = new GetLiveStats()

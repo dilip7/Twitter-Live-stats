@@ -9,22 +9,8 @@ define ['socketio'],(io) ->
 
       socket.on "livestats", (data) ->
         console.log 'emitted data'
-        console.log data
-      ###
-        sockethandler = socket
-        console.log "connect happened"
-
-      socket.on "livestats", (data) ->
-        console.log 'emitted data'
-        console.log data
-        require ['cs!app/helpers/billing'],(billinghelper) ->
-          billinghelper.newCheckin user
-
-    emit:(tagstring) ->
-      console.log "emit"
-      if sockethandler?
-        sockethandler.emit "joinroom" ,{"tagstring":tagstring}
-     ###
+        require ['cs!app/helpers/app'],(apphelper) ->
+          apphelper.renderstats data
 
   new SocketHelper()
 

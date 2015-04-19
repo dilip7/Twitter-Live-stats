@@ -54,6 +54,8 @@ class StoreTweets
           _callback err,res
 
     emitsocket = (stats,_callback) ->
+      # top 10 for debugging
+      stats = stats.slice(0,10)
       sockethelper.sendstats stats,tagsstring
       _callback null
 
