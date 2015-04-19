@@ -12,3 +12,10 @@ define ['marionette','jade!app/views/layouts/eachtweet'],(Marionette,template) -
       that = @
       require ['cs!app/helpers/app'],(apphelper) ->
         apphelper.gettweets that.model.attributes.domain
+    templateHelpers:
+      getTweetLink:() ->
+        console.log 'HERE it is '
+        console.log @
+        url  = "https://twitter.com/" + @user.screen_name + "/status/" + @id_str
+        url
+
