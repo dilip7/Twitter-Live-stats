@@ -14,7 +14,6 @@ routes = (app) ->
   ###
 
   app.post '/gettweets' , (req,res) ->
-    console.log req.body
     gettweetshelper = require './helpers/gettweets'
     gettweetshelper.gettweets req.body,(response) ->
       res.header "Access-Control-Allow-Origin", "*"
