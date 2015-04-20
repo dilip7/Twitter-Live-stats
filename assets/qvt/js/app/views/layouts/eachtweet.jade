@@ -1,4 +1,10 @@
-a(href='javascript:void(0)')
- | #{getTweetLink()}
 span  
+ | Tweet
+ br
  | #{text}
+br
+span
+ | Link
+ br
+ a(href='javascript:void(0)',target="_blank")
+   | #{getTweetLink()}

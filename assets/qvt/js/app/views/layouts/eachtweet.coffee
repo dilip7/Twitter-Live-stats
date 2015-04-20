@@ -3,8 +3,6 @@ define ['marionette','jade!app/views/layouts/eachtweet'],(Marionette,template) -
     tagName : 'li'
     className: ''
     template: template
-    events:
-      'click #fetchtweets' : 'fetchtweets'
     fetchtweets : ->
       that = @
       require ['cs!app/helpers/app'],(apphelper) ->
