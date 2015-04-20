@@ -3,6 +3,6 @@ define ['marionette','cs!app/views/layouts/eachstat'],(Marionette,StatLayout) ->
     template : '<strong> No stats found. </strong>'
   class StatsLayout extends Marionette.CollectionView
     tagName :  'ul'
-    #className : 'dashboard-list'
+    className : 'nav nav-sidebar'
     itemView: StatLayout
     emptyView : NoStatView

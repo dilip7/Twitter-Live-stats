@@ -1,6 +1,7 @@
 define ['marionette','jade!app/views/layouts/eachtweet'],(Marionette,template) ->
   class EachTweetView extends Marionette.Layout
     tagName : 'li'
+    className: ''
     template: template
     events:
       'click #fetchtweets' : 'fetchtweets'

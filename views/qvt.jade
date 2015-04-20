@@ -6,7 +6,13 @@ head
     title InstaDemo 
     meta(name="viewport" content="width=device-width,user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/qvt/css/dashboard.css')
 body
+  nav.navbar.navbar-inverse.navbar-fixed-top
+    .container-fluid
+      .navbar-header(style='margin:15px 0px;')
+        a.nabar-brand(href='#',style='color:white;')
+          | Live Traffic
   .container-fluid
     .row-fluid
       #sidebar-left.span1
@@ -17,10 +23,5 @@ body
             | You need to have
             a(href='http://en.wikipedia.org/wiki/JavaScript', target='_blank') JavaScript
             | enabled to use this site.
-      #content.span11
-  footer
-      span
-        | ©
-        Demo app for live stream stats 
-        | 2014
+      #content
   script(data-main='/qvt/js/run',src='/qvt/js/components/requirejs/require.js')

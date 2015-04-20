@@ -67,7 +67,7 @@ class StoreTweets
     # now emit this stats , havenot added any empty stats check etc as mostly we will find some tweets
     emitsocket = (stats,_callback) ->
       # top 10 for demo purpose
-      stats = stats.slice(0,10)
+      #stats = stats.slice(0,10)
       sockethelper.sendstats stats,tagsstring
       _callback null
 
