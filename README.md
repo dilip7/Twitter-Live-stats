@@ -19,6 +19,3 @@ in both these cases peocess will restart.
 1. on desktop pcs , clicking on url is little bit messed up as data is fetched fast ,but on mobiles it works like charm
 2. UI , UX  could be improved period. 
 
-
-#TODO
-clicking on  domain shows list of tweets which had the specified domain url in them (either directly or shortened)
