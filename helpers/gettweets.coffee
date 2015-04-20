@@ -10,7 +10,6 @@ class GetTweets
   gettweets : (incoming,callback) ->
 
     gettweets = (_callback) ->
-      console.log 'here'
       _mongo.getClient (err,db) ->
         collection = db.collection config.mongocollection
         #collection.find {"domain":"#{incoming.domain}"}.sort({"timestamp_ms":-1}).toArray() ,{w:1},(err,res)->

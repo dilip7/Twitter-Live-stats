@@ -12,8 +12,6 @@ class SanityCheck
     sockets = (_callback) ->
       socket = require './socket'
       io = require('socket.io').listen(app,{log:false})
-      #MemStore = require("socket.io/lib/stores/memory")
-      #io.set "store" , new MemStore()
       socket.setsocket io
       require('../helpers/sockets').initialize(io)
       console.log 'SOCKET.IO [OK]'

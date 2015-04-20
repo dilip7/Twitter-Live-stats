@@ -8,5 +8,4 @@ define ['marionette','jade!app/views/layouts/content','cs!app/views/collections/
       @.listenTo mediator.events,'showtweets',(tweets) =>
         @tweetslist.show(new TweetsView(collection:tweets))
       @.listenTo mediator.events,'showstats',(stats) =>
-        console.log 'listened to  in showstats'
         @statslist.show(new StatsView(collection:stats))

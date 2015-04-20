@@ -1,7 +1,6 @@
+//node and express setup
 require('coffee-script/register');
 express = require('express');
-//exphbs = require('express-handlebars'),
-
 
 bodyParser = require("body-parser");
 cookieParser = require('cookie-parser');
@@ -10,12 +9,8 @@ RedisStore = require('connect-redis')(session),
 methodOverride = require('method-override');
 errorHandler = require('errorhandler');
 helmet = require('helmet');
-csrf = require ('csurf');
 twitter = require('twitter');
-mongoose = require('mongoose');
-//routes = require('./routes');
 config = require('./config');
-
 
 var app;
 
@@ -42,7 +37,6 @@ app.use(session({
 app.use(express.static(__dirname + '/assets'));
 
 webappRouter = express.Router();
-//webappRouter.use(csrf());
 webappRoutes = require('./routers')(webappRouter);
 app.use('/',webappRoutes);
 
