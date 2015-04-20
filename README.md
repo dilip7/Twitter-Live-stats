@@ -16,6 +16,6 @@ in both these cases peocess will restart.
 
 
 # limitations
-1. on desktop pcs , clicking on url is little bit messed up as data is fetched fast ,but on mobiles it works like charm
+1. on desktop pcs , clicking on url is little bit messed up as data is fetched fast ,but on mobiles it works like charm,because of this might have to click several times on link in stats for tweets to load
 2. UI , UX  could be improved period. 
 
