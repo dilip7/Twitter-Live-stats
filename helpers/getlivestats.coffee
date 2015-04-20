@@ -5,6 +5,9 @@ sockethelper = require('../core/socket')
 storetweetshelper = require('../helpers/storetweets')
 
 class GetLiveStats
+  # function to stream twitter based on word
+  # if stream returns error or ends , server process will exit
+  # so ideally process will restart with zero state
   getdata: () ->
     trackingstring = "android"
     twit.stream 'statuses/filter', { track: trackingstring}, (stream) ->
@@ -18,5 +21,6 @@ class GetLiveStats
         process.exit(1)
       stream.on "end",(err) ->
         console.log "Stream end called, rate limit"
+        process.exit(1)
 
 module.exports = new GetLiveStats()

@@ -7,6 +7,7 @@ sockethelper = require('./sockets')
 exapndurlendpoint  = "http://api.longurl.org/v2/expand?url="
 
 class GetTweets
+  # function to return all tweets which have specified domain embedded in them
   gettweets : (incoming,callback) ->
 
     gettweets = (_callback) ->
