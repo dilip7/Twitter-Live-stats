@@ -10,11 +10,6 @@ If we want to fetch live stats for hashtag "android" , dashboard will report top
 
 Dependencies:
 
-MongoDB is used from MongoLab as an addon on heroku
-
-if twitter sends #error
-  server will stop.
-  twitter sends #end
-  server will stop ..
-
-in both these cases process will restart.
+- MongoDB is used from MongoLab as an addon on heroku
+- Longurl API is used to get expanded URL from shortened URL from tweets
+- Tweeter Stream API are used for fetching live tweets
